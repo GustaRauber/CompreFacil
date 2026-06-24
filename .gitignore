@@ -42,3 +42,61 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# ============================================================================
+# 🔒 SECURITY: SECRETS, CREDENTIALS, AND SENSITIVE FILES - NEVER COMMIT THESE
+# ============================================================================
+
+# Firebase Configuration (MUST GENERATE LOCALLY with flutterfire configure)
+lib/firebase_options.dart
+/android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# API Keys, Tokens, Service Accounts
+credentials.json
+*-key.json
+*-private-key.json
+service-account*.json
+api-keys.json
+
+# Android Signing Keys & Keystores
+/android/app/*.keystore
+/android/app/*.jks
+/android/key.properties
+keystore.jks
+
+# iOS Certificates & Provisioning Profiles
+ios/Certificates/
+ios/Provisioning/
+*.mobileprovision
+*.cer
+*.p8
+*.p12
+
+# Cloud Functions Secrets
+functions/node_modules/
+functions/.env*
+functions/secrets.json
+
+# Local Development Overrides
+local.properties
+*.local.dart
+
+# Database Backups & Temporary Files
+*.db-shm
+*.db-wal
+*.sqlite3
+
+# Misc Sensitive Files
+*.pem
+*.key
+*.keystore
+*.jks
+*_secret*
+config_*.json
