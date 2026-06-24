@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "439073852257",
+    "project_id": "comprefacil-f206f",
+    "storage_bucket": "comprefacil-f206f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439073852257:android:87df2cdc3ebd7bdde09320",
+        "android_client_info": {
+          "package_name": "com.example.compre_facil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439073852257-nbadvt4c8c4t44du3qkf385k6nrdj8or.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMahM7UNTDAvLxKPiOujaPGWOxCDaFcvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439073852257-nbadvt4c8c4t44du3qkf385k6nrdj8or.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

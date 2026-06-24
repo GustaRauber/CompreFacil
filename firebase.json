@@ -1,0 +1,28 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "comprefacil-f206f",
+          "appId": "1:439073852257:android:87df2cdc3ebd7bdde09320",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "comprefacil-f206f",
+          "configurations": {
+            "android": "1:439073852257:android:87df2cdc3ebd7bdde09320",
+            "ios": "1:439073852257:ios:3cb597b00e2d3d42e09320",
+            "macos": "1:439073852257:ios:3cb597b00e2d3d42e09320",
+            "web": "1:439073852257:web:a8c32dfe17463689e09320",
+            "windows": "1:439073852257:web:b30e60b766a89a11e09320"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}
