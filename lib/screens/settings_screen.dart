@@ -64,12 +64,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _confirmAndDeleteAccount() async {
+    // Prevent race condition: block multiple clicks while deleting
+    if (_isDeleting) return;
+
     final confirm = await showDialog<bool>(
       context: context,
+      barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Text('Excluir conta'),
-        content: const Text(
-            'Tem certeza que deseja excluir sua conta e todos os dados associados? Esta ação é irreversível.'),
+        title: const Text('⚠️ Excluir Conta Permanentemente'),
+        content:
+            const Text('Sua conta e TODOS os dados associados serão deletados. '
+                'Esta ação é irreversível.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -77,7 +82,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Excluir', style: TextStyle(color: Colors.red)),
+            child: const Text('Entendo, Excluir',
+                style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -95,11 +101,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       Navigator.pushReplacementNamed(context, '/login');
     } catch (e) {
       if (!mounted) return;
+      setState(() => _isDeleting = false);
+      // Generic error message without technical details
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao excluir conta: ${e.toString()}')),
+        const SnackBar(content: Text('Erro ao excluir. Tente novamente')),
       );
-    } finally {
-      if (mounted) setState(() => _isDeleting = false);
     }
   }
 
@@ -227,17 +233,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         const SizedBox(height: 12),
                         OutlinedButton(
-                          onPressed: _isDeleting ? null : _confirmAndDeleteAccount,
+                          onPressed:
+                              _isDeleting ? null : _confirmAndDeleteAccount,
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Colors.red),
                             foregroundColor: Colors.red,
-                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 20),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
                           child: _isDeleting
-                              ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                              ? const SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child:
+                                      CircularProgressIndicator(strokeWidth: 2))
                               : const Text('Excluir conta'),
                         ),
                         const SizedBox(height: 14),

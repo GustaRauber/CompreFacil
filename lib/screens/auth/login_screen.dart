@@ -80,9 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleForgotPassword() {
     final email = _emailController.text.trim();
-    if (email.isEmpty || !email.contains('@')) {
+    // Validate email with robust regex pattern to prevent invalid emails
+    final emailRegex =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    if (!emailRegex.hasMatch(email)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Digite um e-mail válido para recuperação')),
+        const SnackBar(content: Text('Digite um e-mail válido')),
       );
       return;
     }
@@ -91,14 +94,18 @@ class _LoginScreenState extends State<LoginScreen> {
     AuthService.sendPasswordResetEmail(email: email).then((_) {
       if (!mounted) return;
       setState(() => _isLoading = false);
+      // Generic message to prevent email enumeration attacks
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('E-mail de recuperação enviado')),
+        const SnackBar(
+            content: Text(
+                'Se o e-mail existir, você receberá instruções de recuperação')),
       );
     }).catchError((e) {
       if (!mounted) return;
       setState(() => _isLoading = false);
+      // Generic error message without exposing technical details
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao enviar e-mail: ${e.toString()}')),
+        const SnackBar(content: Text('Erro ao processar recuperação')),
       );
     });
   }
